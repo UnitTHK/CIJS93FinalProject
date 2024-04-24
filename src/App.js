@@ -19,6 +19,9 @@ function App() {
     setLoading(true);
     setError(null);
 
+    // Add a loading message
+    setMessages(prevMessages => [...prevMessages, { text: <BeatLoader color={"#123abc"} loading={true} size={15} />, sender: 'loading' }]);
+
     try {
       const response = await fetch('https://cijs93api.thk.icu/chat', {
         method: 'POST',
@@ -29,6 +32,9 @@ function App() {
       });
 
       const data = await response.json();
+
+      // Remove the loading message
+      setMessages(prevMessages => prevMessages.slice(0, -1));
 
       // Display the API's response on the chat interface
       setMessages(prevMessages => [...prevMessages, { text: data.reply, sender: 'api' }]);
@@ -52,11 +58,10 @@ function App() {
           <header className="chat-header">
             ChatBot Interface
           </header>
-          {loading && <BeatLoader color={"#123abc"} loading={loading} size={15} />}
           {error && <div>{error}</div>}
           <ul className="chat-messages">
             {messages.map((msg, index) => (
-                <li key={index} className={`message ${msg.sender === 'user' ? 'user' : 'api'}`}>
+                <li key={index} className={`message ${msg.sender}`}>
                   {msg.text}
                 </li>
             ))}
