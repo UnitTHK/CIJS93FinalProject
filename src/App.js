@@ -20,7 +20,7 @@ function App() {
     setError(null);
 
     try {
-      const response = await fetch('http://213.35.108.112:8000/chat', {
+      const response = await fetch('https://cijs93api.thk.icu/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
