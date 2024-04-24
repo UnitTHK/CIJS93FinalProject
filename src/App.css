@@ -10,6 +10,14 @@
   --text-color: #f5f5f5;
 }
 
+.theme-toggle {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
 .App {
   display: flex;
   width: 100%;

@@ -59,10 +59,10 @@ function App() {
 
   return (
       <div className="App">
-        <button onClick={toggleTheme}>Toggle Theme</button>
         <div className="chat-container">
           <header className="chat-header">
             ChatBot Interface
+            <button className="theme-toggle" onClick={toggleTheme}>🌓</button>
           </header>
           {error && <div>{error}</div>}
           <ul className="chat-messages">
