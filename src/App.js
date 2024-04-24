@@ -4,6 +4,8 @@ import './App.css';
 function App() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   // Function to handle sending messages
   const sendMessage = async () => {
@@ -13,6 +15,8 @@ function App() {
     // Display the user's message on the chat interface
     setMessages(prevMessages => [...prevMessages, { text: messageContent, sender: 'user' }]);
     setInput('');
+    setLoading(true);
+    setError(null);
 
     try {
       const response = await fetch('http://213.35.108.112:8000/chat', {
@@ -28,7 +32,10 @@ function App() {
       // Display the API's response on the chat interface
       setMessages(prevMessages => [...prevMessages, { text: data.reply, sender: 'api' }]);
     } catch (error) {
+      setError('Failed to send message');
       console.error('Failed to send message:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -44,6 +51,8 @@ function App() {
           <header className="chat-header">
             ChatBot Interface
           </header>
+          {loading && <div>Loading...</div>}
+          {error && <div>{error}</div>}
           <ul className="chat-messages">
             {messages.map((msg, index) => (
                 <li key={index} className={`message ${msg.sender === 'user' ? 'user' : 'api'}`}>
