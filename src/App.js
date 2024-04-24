@@ -15,7 +15,7 @@ function App() {
     setInput('');
 
     try {
-      const response = await fetch('http://localhost:8000/chat', {
+      const response = await fetch('http://213.35.108.112:8000/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
