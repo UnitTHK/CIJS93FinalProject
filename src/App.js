@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import BeatLoader from "react-spinners/BeatLoader";
 import './App.css';
 
 function App() {
@@ -13,24 +14,24 @@ function App() {
     if (!messageContent) return;
 
     // Display the user's message on the chat interface
-    setMessages(prevMessages => [...prevMessages, {text: messageContent, sender: 'user'}]);
+    setMessages(prevMessages => [...prevMessages, { text: messageContent, sender: 'user' }]);
     setInput('');
     setLoading(true);
     setError(null);
 
     try {
-      const response = await fetch('https://cijs93api.thk.icu/chat', {
+      const response = await fetch('http://213.35.108.112:8000/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({message: messageContent})
+        body: JSON.stringify({ message: messageContent })
       });
 
       const data = await response.json();
 
       // Display the API's response on the chat interface
-      setMessages(prevMessages => [...prevMessages, {text: data.reply, sender: 'api'}]);
+      setMessages(prevMessages => [...prevMessages, { text: data.reply, sender: 'api' }]);
     } catch (error) {
       setError('Failed to send message');
       console.error('Failed to send message:', error);
@@ -51,15 +52,7 @@ function App() {
           <header className="chat-header">
             ChatBot Interface
           </header>
-          {loading &&
-              <div className="spinner">
-                <div className="rect1"></div>
-                <div className="rect2"></div>
-                <div className="rect3"></div>
-                <div className="rect4"></div>
-                <div className="rect5"></div>
-              </div>
-          }
+          {loading && <BeatLoader color={"#123abc"} loading={loading} size={15} />}
           {error && <div>{error}</div>}
           <ul className="chat-messages">
             {messages.map((msg, index) => (
