@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import BeatLoader from "react-spinners/BeatLoader";
 import './App.css';
 
@@ -7,19 +7,26 @@ function App() {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
 
-  // Function to handle sending messages
+  useEffect(() => {
+    document.documentElement.className = theme;
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
+  };
+
   const sendMessage = async () => {
     const messageContent = input.trim();
     if (!messageContent) return;
 
-    // Display the user's message on the chat interface
     setMessages(prevMessages => [...prevMessages, { text: messageContent, sender: 'user' }]);
     setInput('');
     setLoading(true);
     setError(null);
 
-    // Add a loading message
     setMessages(prevMessages => [...prevMessages, { text: <BeatLoader color={"#123abc"} loading={true} size={15} />, sender: 'loading' }]);
 
     try {
@@ -33,10 +40,8 @@ function App() {
 
       const data = await response.json();
 
-      // Remove the loading message
       setMessages(prevMessages => prevMessages.slice(0, -1));
 
-      // Display the API's response on the chat interface
       setMessages(prevMessages => [...prevMessages, { text: data.reply, sender: 'api' }]);
     } catch (error) {
       setError('Failed to send message');
@@ -54,6 +59,7 @@ function App() {
 
   return (
       <div className="App">
+        <button onClick={toggleTheme}>Toggle Theme</button>
         <div className="chat-container">
           <header className="chat-header">
             ChatBot Interface
