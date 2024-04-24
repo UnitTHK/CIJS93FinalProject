@@ -13,7 +13,7 @@ function App() {
     if (!messageContent) return;
 
     // Display the user's message on the chat interface
-    setMessages(prevMessages => [...prevMessages, { text: messageContent, sender: 'user' }]);
+    setMessages(prevMessages => [...prevMessages, {text: messageContent, sender: 'user'}]);
     setInput('');
     setLoading(true);
     setError(null);
@@ -24,13 +24,13 @@ function App() {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ message: messageContent })
+        body: JSON.stringify({message: messageContent})
       });
 
       const data = await response.json();
 
       // Display the API's response on the chat interface
-      setMessages(prevMessages => [...prevMessages, { text: data.reply, sender: 'api' }]);
+      setMessages(prevMessages => [...prevMessages, {text: data.reply, sender: 'api'}]);
     } catch (error) {
       setError('Failed to send message');
       console.error('Failed to send message:', error);
@@ -51,7 +51,15 @@ function App() {
           <header className="chat-header">
             ChatBot Interface
           </header>
-          {loading && <div>Loading...</div>}
+          {loading &&
+              <div className="spinner">
+                <div className="rect1"></div>
+                <div className="rect2"></div>
+                <div className="rect3"></div>
+                <div className="rect4"></div>
+                <div className="rect5"></div>
+              </div>
+          }
           {error && <div>{error}</div>}
           <ul className="chat-messages">
             {messages.map((msg, index) => (
