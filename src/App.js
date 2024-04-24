@@ -80,7 +80,7 @@ function App() {
                 onKeyPress={handleKeyPress}
                 placeholder="Type your message here..."
             />
-            <button onClick={sendMessage}>Send</button>
+            <button onClick={sendMessage} disabled={loading}>Send</button>
           </div>
         </div>
       </div>
