@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/xxthkxx.github.io/CIJS93FinalProject/static/css/main.cbbc1edb.css",
+    "main.js": "/xxthkxx.github.io/CIJS93FinalProject/static/js/main.d96e16d5.js",
+    "static/js/453.6981f3b5.chunk.js": "/xxthkxx.github.io/CIJS93FinalProject/static/js/453.6981f3b5.chunk.js",
+    "index.html": "/xxthkxx.github.io/CIJS93FinalProject/index.html",
+    "main.cbbc1edb.css.map": "/xxthkxx.github.io/CIJS93FinalProject/static/css/main.cbbc1edb.css.map",
+    "main.d96e16d5.js.map": "/xxthkxx.github.io/CIJS93FinalProject/static/js/main.d96e16d5.js.map",
+    "453.6981f3b5.chunk.js.map": "/xxthkxx.github.io/CIJS93FinalProject/static/js/453.6981f3b5.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cbbc1edb.css",
+    "static/js/main.d96e16d5.js"
+  ]
+}
